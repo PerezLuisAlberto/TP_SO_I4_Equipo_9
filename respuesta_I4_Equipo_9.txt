@@ -1,0 +1,77 @@
+Marlon Nolasco - Beta
+Luis Perez - Gamma
+
+A - Blue
+B - SkyBlue
+c - Blue
+d - El favi.con que quedo en main (master) es el de Beta
+
+e - Si, Gamma termino con problemas al hacer el push. Un error "push rejected" porque el repositorio remoto tenía los cambios de BETA que GAMMA no poseía localmente en ese momento.   
+   
+    Mensaje de error que habia surgido
+####################################################################### Primer mensaje
+luisalbertoperez@pop-os:~/tp_So_3/Tp_SO_I4_109$ git push origin TESTING
+To https://github.com/PerezLuisAlberto/TP_SO_I4_Equipo_9
+ ! [rejected]        TESTING -> TESTING (fetch first)
+error: falló el empuje de algunas referencias a 'https://github.com/PerezLuisAlberto/TP_SO_I4_Equipo_9'
+ayuda: Actualizaciones fueron rechazadas porque el remoto contiene trabajo que
+ayuda: no existe localmente. Esto es causado usualmente por otro repositorio
+ayuda: empujando a la misma ref. Quizás quieras integrar primero los cambios
+ayuda: remotos (ej. 'git pull ...') antes de volver a hacer push.
+ayuda: Mira 'Notes about fast-forwards' en 'git push --help' para detalles.
+############################################################################ segundo mensaje
+uisalbertoperez@pop-os:~/tp_So_3/Tp_SO_I4_109$ git pull origin TESTING
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (1/1), done.
+remote: Total 3 (delta 2), reused 3 (delta 2), pack-reused 0 (from 0)
+Desempaquetando objetos: 100% (3/3), 310 bytes | 310.00 KiB/s, listo.
+Desde https://github.com/PerezLuisAlberto/TP_SO_I4_Equipo_9
+ * branch            TESTING    -> FETCH_HEAD
+   8325014..8407c84  TESTING    -> origin/TESTING
+ayuda: Hacer un pull sin especificar cómo reconciliar las ramas es poco
+ayuda: recomendable. Puedes eliminar este mensaje usando uno de los
+ayuda: siguientes comandos antes de tu siguiente pull:
+ayuda: 
+ayuda:   git config pull.rebase false  # hacer merge (estrategia por defecto)
+ayuda:   git config pull.rebase true   # aplicar rebase
+ayuda:   git config pull.ff only       # aplicar solo fast-forward
+ayuda: 
+ayuda: Puedes reemplazar "git config" con "git config --global" para aplicar
+ayuda: la preferencia en todos los repositorios. Puedes también pasar --rebase,
+ayuda: --no-rebase, o --ff-only en el comando para sobrescribir la configuración
+ayuda: por defecto en cada invocación.
+fatal: Necesita especificar cómo reconciliar las ramas divergentes.
+#################################################################################### Pasos a la solucion
+luisalbertoperez@pop-os:~/tp_So_3/Tp_SO_I4_109$ git config pull.rebase false
+luisalbertoperez@pop-os:~/tp_So_3/Tp_SO_I4_109$ git pull origin TESTING
+Desde https://github.com/PerezLuisAlberto/TP_SO_I4_Equipo_9
+ * branch            TESTING    -> FETCH_HEAD
+Auto-fusionando index.html
+CONFLICTO (contenido): Conflicto de fusión en index.html
+Fusión automática falló; arregle los conflictos y luego realice un commit con el resultado.
+luisalbertoperez@pop-os:~/tp_So_3/Tp_SO_I4_109$ git add index.html
+git commit -m "Gamma: Resuelve conflicto de push simultáneo en TESTING"
+git push origin TESTING
+[TESTING d5a2613] Gamma: Resuelve conflicto de push simultáneo en TESTING
+Enumerando objetos: 13, listo.
+Contando objetos: 100% (13/13), listo.
+Compresión delta usando hasta 12 hilos
+Comprimiendo objetos: 100% (9/9), listo.
+Escribiendo objetos: 100% (9/9), 933 bytes | 933.00 KiB/s, listo.
+Total 9 (delta 6), reusados 0 (delta 0), pack-reusados 0
+remote: Resolving deltas: 100% (6/6), completed with 2 local objects.
+To https://github.com/PerezLuisAlberto/TP_SO_I4_Equipo_9
+   8407c84..d5a2613  TESTING -> TESTING
+##################################################################################
+ 
+ G- ¿Qué soluciones pueden aplicar y cual seria la consecuencia de cada solución adoptada? 
+ Hacer git pull, resolver el conflicto unificando las líneas de código, hacer commit y push. 
+ Consecuencia: Se mantiene el trabajo de ambos integrantes intacto en el historial.
+
+ H- ¿Qué sucede si cada uno utiliza el push -f? 
+ Forzar el push pisaría los cambios de la rama remota, borrando por completo el trabajo del integrante que hizo el push primero.
+
+ I- ¿Qué debo hacer para que el index.html tengas todos los <p> de los puntos 18,19 y 20 en DESARROLLO? 
+ Ejecutar un git pull tras el push del compañero, abrir el archivo en conflicto, mantener las etiquetas de todos los integrantes, 
+ crear un nuevo commit de unificación y subirlo.
